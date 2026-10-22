@@ -86,13 +86,27 @@ The line chart above uses the dashboard's zoomed-in y-axis (4.7 to 5.9), which m
 
 ---
 
+## 📚 The full project workbook
+
+This analysis is one chapter of a larger Tableau story on sleep and productivity, included as [`tableau/sleep-cycle-and-productivity-full-story.twbx`](tableau/sleep-cycle-and-productivity-full-story.twbx). Its cover page lists all contributors. Using the same dataset, the story also covers:
+
+- Sleep quality vs sleep hours by age group and gender
+- Screen time before bed vs sleep quality and productivity
+- Exercise duration and its link to sleep quality and productivity by age group
+- Stress and work hours vs sleep quality
+
+The same caveat applies to every chapter: sleep quality isn't correlated with any of these columns in this dataset.
+
+---
+
 ## 🗂 Repository
 
 ```
 data/
 └── sleep_cycle_productivity.csv                 source data (5,000 rows)
 tableau/
-└── sleep-quality-vs-wake-time-and-age.twbx      my dashboard, data packaged in
+├── sleep-quality-vs-wake-time-and-age.twbx      this analysis, data packaged in
+└── sleep-cycle-and-productivity-full-story.twbx the full Tableau story
 analysis/
 └── check_patterns.py                            statistical check and README figures
 docs/
@@ -104,7 +118,7 @@ docs/
 
 ## ▶️ How to explore it
 
-- **Tableau dashboard:** open `tableau/sleep-quality-vs-wake-time-and-age.twbx` in Tableau Desktop or the free [Tableau Public](https://public.tableau.com/app/learn/how-to-videos) app. The data is packaged inside the workbook.
+- **Tableau dashboard:** open `tableau/sleep-quality-vs-wake-time-and-age.twbx` in Tableau Desktop or the free [Tableau Public](https://public.tableau.com/app/learn/how-to-videos) app. The data is packaged inside the workbook. Open `sleep-cycle-and-productivity-full-story.twbx` and go to the *Final Story* tab for the full project.
 - **Statistical check:**
 
   ```bash
