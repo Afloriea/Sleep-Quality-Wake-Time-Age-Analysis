@@ -14,7 +14,7 @@ A Tableau analysis of whether the time people wake up, and their age, relate to 
 | **Data** | 5,000 sleep records for 3,858 people across 2024, 15 columns ([`data/`](data/)) |
 | **Tools** | Tableau for the dashboard, Python for the statistical check |
 | **Result** | The dashboard shows gaps of up to one point between groups, but none of them is statistically significant, and sleep quality has no correlation (\|r\| < 0.02) with any other column |
-| **Context** | My part of a five-person final project for IMT 562 (Group 6): the team built one Tableau story, and each member owned one question |
+| **Context** | My part of a five-person final project: the team built one Tableau story, and each member owned one question |
 
 ![Mean sleep quality by age group and wake-up time](docs/heatmap_age_wake.png)
 
