@@ -78,6 +78,54 @@ def save_heatmap(df: pd.DataFrame) -> None:
     plt.close(fig)
 
 
+def save_line_chart(df: pd.DataFrame) -> None:
+    """Recreates the Tableau line chart, including its zoomed-in y-axis."""
+    means = df.pivot_table(index="Wake Time", columns="Age Group", values=QUALITY,
+                           aggfunc="mean", observed=False)
+    colors = ["#4e79a7", "#f28e2b", "#59a14f", "#76b7b2", "#edc948"]
+    fig, ax = plt.subplots(figsize=(8, 4.6))
+    for age, color in zip(AGE_LABELS, colors):
+        ax.plot(range(len(WAKE_LABELS)), means[age], marker="o", markersize=4,
+                linewidth=2, color=color, label=age)
+    ax.set_xticks(range(len(WAKE_LABELS)), WAKE_LABELS)
+    ax.set_ylim(4.7, 5.9)
+    ax.set_xlabel("Wake-up time (Sleep End Time)")
+    ax.set_ylabel("Average sleep quality")
+    ax.grid(axis="y", color="#e6e6e6")
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.legend(title="Age group", frameon=False, bbox_to_anchor=(1.01, 1), loc="upper left")
+    ax.set_title("How wake-up time affects sleep quality across age groups")
+    fig.tight_layout()
+    fig.savefig(DOCS / "line_wake_quality.png", dpi=150)
+    plt.close(fig)
+
+
+def save_box_dots(df: pd.DataFrame) -> None:
+    """Recreates the Tableau box plot with one orange dot per score, shaded by row count."""
+    fig, ax = plt.subplots(figsize=(8, 4.6))
+    groups = [df.loc[df["Age Group"] == age, QUALITY] for age in AGE_LABELS]
+    ax.boxplot(groups, positions=range(len(AGE_LABELS)), widths=0.45, patch_artist=True,
+               showfliers=False, medianprops={"color": "#555555", "linewidth": 2},
+               boxprops={"facecolor": "#d9d9d9", "edgecolor": "#9e9e9e"},
+               whiskerprops={"color": "#555555"}, capprops={"color": "#555555"})
+    most = max(g.value_counts().max() for g in groups)
+    for x, g in enumerate(groups):
+        for score, count in g.value_counts().items():
+            ax.scatter(x, score, s=160, color="#f28e2b", alpha=0.25 + 0.6 * count / most,
+                       edgecolors="none", zorder=3)
+    ax.set_xticks(range(len(AGE_LABELS)), AGE_LABELS)
+    ax.set_yticks(range(1, 11))
+    ax.set_xlabel("Age group")
+    ax.set_ylabel("Sleep quality (1-10)")
+    ax.grid(axis="y", color="#e6e6e6")
+    ax.set_axisbelow(True)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.set_title("How sleep quality varies across age groups")
+    fig.tight_layout()
+    fig.savefig(DOCS / "box_age_quality.png", dpi=150)
+    plt.close(fig)
+
+
 def save_reality_check(df: pd.DataFrame) -> None:
     fig, (left, right) = plt.subplots(1, 2, figsize=(10, 4))
 
@@ -125,6 +173,8 @@ def main() -> None:
 
     DOCS.mkdir(exist_ok=True)
     save_heatmap(df)
+    save_line_chart(df)
+    save_box_dots(df)
     save_reality_check(df)
     print(f"\nFigures saved to {DOCS.relative_to(ROOT)}/")
 

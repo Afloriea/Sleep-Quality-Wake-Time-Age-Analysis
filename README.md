@@ -52,8 +52,15 @@ Selecting a mark in one view highlights the same age group and wake-up time in t
 
 ## 📊 What the dashboard shows
 
+The two charts below are recreated in Python from the dashboard's line chart and box plot, with the same bins and layout.
+
+![Average sleep quality by wake-up time, one line per age group](docs/line_wake_quality.png)
+
 - **Waking between 4 and 8 AM** goes with the highest average sleep quality (≈ 5.6 out of 10). Waking **before 4 AM** (5.43) or **after 8 AM** (5.26) is lower.
-- **Age groups look almost the same** overall, from 5.39 (18-19) to 5.58 (20-29). The box plots overlap almost completely.
+
+![Box plot of sleep quality by age group, with one dot per score shaded by number of people](docs/box_age_quality.png)
+
+- **Age groups look almost the same** overall, from 5.39 (18-19) to 5.58 (20-29). The boxes overlap almost completely, and every score from 1 to 10 is about equally common in every group.
 - **The largest gaps are in small cells.** For example, 18-19 year olds waking at 8-10 AM average 4.86, but that cell holds only 21 people.
 
 ---
@@ -71,6 +78,8 @@ Before turning these into recommendations, I checked them in Python ([`analysis/
 | Correlation of sleep quality with every other column | all \|r\| < 0.02 | Not even total sleep hours or stress relate to it |
 | Distribution of sleep quality | 480–521 rows for each score from 1 to 10 | Almost perfectly uniform, unlike real survey data |
 
+The line chart above uses the dashboard's zoomed-in y-axis (4.7 to 5.9), which makes gaps of a few tenths look steep. On the full 1–10 scale (right panel) the same means are almost flat.
+
 **Conclusion:** the dataset is almost certainly synthetic, with sleep quality generated independently of the other columns. The patterns in the dashboard are noise, so they shouldn't drive any recommendation. With real data, the same dashboard and checks would show whether the 4–8 AM pattern is genuine.
 
 **What I'd take from this:** a clean-looking chart isn't evidence by itself. Checking sample sizes per cell, testing gaps against chance and looking at the raw distribution should come before drawing a conclusion.
@@ -87,7 +96,9 @@ tableau/
 analysis/
 └── check_patterns.py                            statistical check and README figures
 docs/
+├── box_age_quality.png
 ├── heatmap_age_wake.png
+├── line_wake_quality.png
 └── reality_check.png
 ```
 
