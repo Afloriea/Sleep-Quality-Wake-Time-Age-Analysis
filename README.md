@@ -14,7 +14,7 @@ A Tableau analysis of whether the time people wake up, and their age, relate to 
 | **Data** | 5,000 sleep records for 3,858 people across 2024, 15 columns ([`data/`](data/)) |
 | **Tools** | Tableau for the dashboard, Python for the statistical check |
 | **Result** | The dashboard shows gaps of up to one point between groups, but none of them is statistically significant, and sleep quality has no correlation (\|r\| < 0.02) with any other column |
-| **Context** | My part of a five-person final project: the team built one Tableau story, and each member owned one question |
+| **Context** | Course final project: dashboard built in Tableau, statistical check added afterwards in Python |
 
 ![Mean sleep quality by age group and wake-up time](docs/heatmap_age_wake.png)
 
@@ -22,7 +22,7 @@ A Tableau analysis of whether the time people wake up, and their age, relate to 
 
 ## ❓ Question and approach
 
-The team's project asked how sleep habits relate to productivity and well-being. My question was the wake-up side of it: **do people who wake up at different times sleep better or worse, and is that the same for every age?**
+The project looks at how sleep habits relate to productivity and well-being. This part asks: **do people who wake up at different times sleep better or worse, and is that the same for every age?**
 
 In Tableau I created two calculated fields to segment the data:
 
